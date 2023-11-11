@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CRUD Example</title>
+
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            height: 100vh;
+            margin: 0;
+        }
+
+        h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        form {
+            text-align: center;
+        }
+
+        #itemTable {
+            width: 80%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            border: 1px solid black; /* Table border */
+        }
+
+        #itemTable th, #itemTable td {
+            padding: 10px;
+            border: 1px solid black; /* Cell border */
+            text-align: center;
+        }
+
+       
+
+        #addItemBtn {
+        padding: 10px 20px;
+        background-color: #3CB371; /* Use your preferred grass green color code */
+        color: white;
+        border: 2px solid #2E8B57; /* Use a slightly darker shade of grass green for the border */
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 16px;
+      }
+      
+      /* On hover effect */
+      #addItemBtn:hover {
+        background-color: #2E8B57; /* Use a slightly darker shade of grass green on hover */
+      }
+      
+      /* On click effect */
+      #addItemBtn:active {
+        background-color: #228B22; /* Use a darker shade of grass green on click */
+      }
+
+
+
+        
+/* Styling for the ocean blue alert button */
+.updateBtn {
+padding: 10px 20px;
+background-color: #007BAC; /* Use your preferred ocean blue color code */
+color: white;
+border: 2px solid #005A80; /* Use a slightly darker shade of ocean blue for the border */
+border-radius: 5px;
+cursor: pointer;
+font-size: 16px;
+}
+
+/* On hover effect */
+.updateBtn:hover {
+background-color: #005A80; /* Use a slightly darker shade of ocean blue on hover */
+}
+
+/* On click effect */
+.updateBtn:active {
+background-color: #00416A; /* Use a darker shade of ocean blue on click */
+}
+    
+.deleteBtn {
+  padding: 10px 20px;
+  background-color: #FF0000; /* Red color code */
+  color: white;
+  border: 2px solid #990000; /* Slightly darker shade of red for the border */
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+/* On hover effect */
+.deleteBtn:hover {
+  background-color: #990000; /* Slightly darker shade of red on hover */
+}
+
+/* On click effect */
+.deleteBtn:active {
+  background-color: #660000; /* Darker shade of red on click */
+}
+      
+
+    </style>
+</head>
+
+<body>
+
+    <h3>Student Examination Result System</h3>
+    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQKt9fIN4GmcR7Nf4LzxBtMPkwWiMMrAryM8Q&usqp=CAU">
+
+    <h2>Create IT Student Result</h2>
+    <form id="createForm">
+        <label for="itemName">Subject Name:</label>
+        <input type="text" id="itemName" name="itemName" required>
+        <label for="quantity">Mark:</label>
+        <input type="number" id="quantity" name="quantity" value="0" min="0">
+        <button id="addItemBtn" type="button" onclick="addItem()">Add Item</button>
+    </form>
+
+    <h2>Read, Update, Delete</h2>
+    <table id="itemTable">
+        <thead>
+            <tr>
+                <th>Subject Name</th>
+                <th>Mark</th>
+                <th>Update</th>
+                <th>Delete</th>
+            </tr>
+        </thead>
+        <tbody id="itemList"></tbody>
+    </table>
+
+    <script>
+        // Local data storage
+        let data = [];
+
+        // Function to add an item
+        function addItem() {
+            const itemName = document.getElementById('itemName').value;
+            const quantity = parseInt(document.getElementById('quantity').value, 10) || 0;
+            
+            // Add item to local data
+            data.push({ id: Date.now(), itemName, quantity });
+
+            // Clear input fields
+            document.getElementById('itemName').value = '';
+            document.getElementById('quantity').value = '0';
+
+            // Update the displayed list
+            displayItems();
+        }
+
+        // Function to update an item
+        function updateItem(id) {
+            const newName = prompt('Enter the new name:');
+            const newQuantity = prompt('Enter the new quantity:');
+            const index = data.findIndex(item => item.id === id);
+
+            if (index !== -1 && newName !== null && newQuantity !== null) {
+                data[index].itemName = newName;
+                data[index].quantity = parseInt(newQuantity, 10) || 0;
+                displayItems();
+            }
+        }
+
+        // Function to delete an item
+        function deleteItem(id) {
+            const confirmation = confirm('Are you sure you want to delete this item?');
+
+            if (confirmation) {
+                data = data.filter(item => item.id !== id);
+                displayItems();
+            }
+        }
+
+        // Function to display items
+        function displayItems() {
+            const itemList = document.getElementById('itemList');
+            
+            // Clear the existing list
+            itemList.innerHTML = '';
+
+            // Display each item with update and delete buttons using tr elements
+            data.forEach(item => {
+                const tr = document.createElement('tr');
+
+                const tdName = document.createElement('td');
+                tdName.textContent = item.itemName;
+
+                const tdQuantity = document.createElement('td');
+                tdQuantity.textContent = item.quantity;
+
+                const tdUpdate = document.createElement('td');
+                const updateButton = document.createElement('button');
+                updateButton.textContent = 'Update';
+                updateButton.classList.add('updateBtn'); // Apply the 'updateBtn' class
+                updateButton.addEventListener('click', () => updateItem(item.id));
+                tdUpdate.appendChild(updateButton);
+
+                const tdDelete = document.createElement('td');
+                const deleteButton = document.createElement('button');
+                deleteButton.textContent = 'Delete';
+                deleteButton.classList.add('deleteBtn'); // Apply the 'deleteBtn' class
+                deleteButton.addEventListener('click', () => deleteItem(item.id));
+                tdDelete.appendChild(deleteButton);
+
+                tr.appendChild(tdName);
+                tr.appendChild(tdQuantity);
+                tr.appendChild(tdUpdate);
+                tr.appendChild(tdDelete);
+
+                itemList.appendChild(tr);
+            });
+        }
+    </script>
+
+</body>

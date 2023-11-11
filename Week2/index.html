@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CRUD Example</title>
+</head>
+<body>
+
+    <h2>Create</h2>
+    <form id="createForm">
+        <label for="itemName">Item Name:</label>
+        <input type="text" id="itemName" name="itemName" required>
+        <button type="button" onclick="addItem()">Add Item</button>
+    </form>
+
+    <h2>Read</h2>
+    <ul id="itemList"></ul>
+
+    <script>
+        // Local data storage
+        let data = [];
+
+        // Function to add an item
+        function addItem() {
+            const itemName = document.getElementById('itemName').value;
+            
+            // Add item to local data
+            data.push({ itemName });
+
+            // Clear input field
+            document.getElementById('itemName').value = '';
+
+            // Update the displayed list
+            displayItems();
+        }
+
+        // Function to display items
+        function displayItems() {
+            const itemList = document.getElementById('itemList');
+            
+            // Clear the existing list
+            itemList.innerHTML = '';
+
+            // Display each item
+            data.forEach(item => {
+                const li = document.createElement('li');
+                li.textContent = item.itemName;
+                itemList.appendChild(li);
+            });
+        }
+    </script>
+
+</body>
+</html>

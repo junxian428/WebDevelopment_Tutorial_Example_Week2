@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CRUD Example</title>
+
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            height: 100vh;
+            margin: 0;
+        }
+
+        h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        form {
+            text-align: center;
+        }
+
+        #itemTable {
+            width: 80%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            border: 1px solid black; /* Table border */
+        }
+
+        #itemTable th, #itemTable td {
+            padding: 10px;
+            border: 1px solid black; /* Cell border */
+            text-align: center;
+        }
+
+       
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: center;
+            cursor: pointer;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        tr:hover {
+            background-color: #f5f5f5;
+        }
+
+        .highlight {
+            background-color: yellow;
+        }
+
+        #addItemBtn {
+        padding: 10px 20px;
+        background-color: #3CB371; /* Use your preferred grass green color code */
+        color: white;
+        border: 2px solid #2E8B57; /* Use a slightly darker shade of grass green for the border */
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 16px;
+      }
+      
+      /* On hover effect */
+      #addItemBtn:hover {
+        background-color: #2E8B57; /* Use a slightly darker shade of grass green on hover */
+      }
+      
+      /* On click effect */
+      #addItemBtn:active {
+        background-color: #228B22; /* Use a darker shade of grass green on click */
+      }
+
+
+
+        
+/* Styling for the ocean blue alert button */
+.updateBtn {
+padding: 10px 20px;
+background-color: #007BAC; /* Use your preferred ocean blue color code */
+color: white;
+border: 2px solid #005A80; /* Use a slightly darker shade of ocean blue for the border */
+border-radius: 5px;
+cursor: pointer;
+font-size: 16px;
+}
+
+/* On hover effect */
+.updateBtn:hover {
+background-color: #005A80; /* Use a slightly darker shade of ocean blue on hover */
+}
+
+/* On click effect */
+.updateBtn:active {
+background-color: #00416A; /* Use a darker shade of ocean blue on click */
+}
+    
+.deleteBtn {
+  padding: 10px 20px;
+  background-color: #FF0000; /* Red color code */
+  color: white;
+  border: 2px solid #990000; /* Slightly darker shade of red for the border */
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+/* On hover effect */
+.deleteBtn:hover {
+  background-color: #990000; /* Slightly darker shade of red on hover */
+}
+
+/* On click effect */
+.deleteBtn:active {
+  background-color: #660000; /* Darker shade of red on click */
+}
+      
+#container {
+            display: flex;
+            width: 80%;
+        }
+
+        #leftSection, #rightSection {
+            width: 50%;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+
+        nav {
+            background-color: #333;
+            overflow: hidden;
+            width: 100%; /* Set the width to 100% */
+        }
+
+        nav a {
+            float: left;
+            display: block;
+            color: white;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+        }
+
+        nav a:hover {
+            background-color: #ddd;
+            color: black;
+        }
+
+    </style>
+</head>
+
+<body>
+ <nav>
+    <a href="Project5.html">Student Examination Result System</a>
+        <a href="Project6.html">Timetable</a>
+    </nav>
+
+    <h3>Timetable System</h3>
+    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQKt9fIN4GmcR7Nf4LzxBtMPkwWiMMrAryM8Q&usqp=CAU">
+  <table>
+        <thead>
+            <tr>
+                <th></th> <!-- Empty cell for the time labels -->
+                <th>7am</th>
+                <th>8am</th>
+                <th>9am</th>
+                <th>10am</th>
+                <th>11am</th>
+                <th>12pm</th>
+                <th>1pm</th>
+                <th>2pm</th>
+                <th>3pm</th>
+                <th>4pm</th>
+                <th>5pm</th>
+                <th>6pm</th>
+                <th>7pm</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <th>Monday</th>
+                <td onclick="toggleHighlight(this)" contenteditable="true"></td>
+                <td onclick="toggleHighlight(this)" contenteditable="true"></td>
+                <td onclick="toggleHighlight(this)" contenteditable="true"></td>
+                <td onclick="toggleHighlight(this)" contenteditable="true"></td>
+                <td onclick="toggleHighlight(this)" contenteditable="true"></td>
+                <td onclick="toggleHighlight(this)" contenteditable="true"></td>
+                <td onclick="toggleHighlight(this)" contenteditable="true"></td>
+                <td onclick="toggleHighlight(this)" contenteditable="true"></td>
+                <td onclick="toggleHighlight(this)" contenteditable="true"></td>
+                <td onclick="toggleHighlight(this)" contenteditable="true"></td>
+                <td onclick="toggleHighlight(this)" contenteditable="true"></td>
+                <td onclick="toggleHighlight(this)" contenteditable="true"></td>
+                <td onclick="toggleHighlight(this)" contenteditable="true"></td>
+
+                <!-- Add more cells for Monday as needed -->
+            </tr>
+            <tr>
+                <th>Tuesday</th>
+                <td onclick="toggleHighlight(this)" contenteditable="true"></td>
+                <td onclick="toggleHighlight(this)" contenteditable="true"></td>
+                <td onclick="toggleHighlight(this)" contenteditable="true"></td>
+                <td onclick="toggleHighlight(this)" contenteditable="true"></td>
+                <td onclick="toggleHighlight(this)" contenteditable="true"></td>
+                <td onclick="toggleHighlight(this)" contenteditable="true"></td>
+                <td onclick="toggleHighlight(this)" contenteditable="true"></td>
+                <td onclick="toggleHighlight(this)" contenteditable="true"></td>
+                <td onclick="toggleHighlight(this)" contenteditable="true"></td>
+                <td onclick="toggleHighlight(this)" contenteditable="true"></td>
+                <td onclick="toggleHighlight(this)" contenteditable="true"></td>
+                <td onclick="toggleHighlight(this)" contenteditable="true"></td>
+                <td onclick="toggleHighlight(this)" contenteditable="true"></td>
+            </tr>
+            <!-- Add rows for Wednesday to Sunday as needed -->
+            <tr>
+                <th>Wednesday</th>
+                <td onclick="toggleHighlight(this)" contenteditable="true"></td>
+                <td onclick="toggleHighlight(this)" contenteditable="true"></td>
+                <td onclick="toggleHighlight(this)" contenteditable="true"></td>
+                <td onclick="toggleHighlight(this)" contenteditable="true"></td>
+                <td onclick="toggleHighlight(this)" contenteditable="true"></td>
+                <td onclick="toggleHighlight(this)" contenteditable="true"></td>
+                <td onclick="toggleHighlight(this)" contenteditable="true"></td>
+                <td onclick="toggleHighlight(this)" contenteditable="true"></td>
+                <td onclick="toggleHighlight(this)" contenteditable="true"></td>
+                <td onclick="toggleHighlight(this)" contenteditable="true"></td>
+                <td onclick="toggleHighlight(this)" contenteditable="true"></td>
+                <td onclick="toggleHighlight(this)" contenteditable="true"></td>
+                <td onclick="toggleHighlight(this)" contenteditable="true"></td>
+            </tr>
+            <tr>
+                <th>Thursday</th>
+                <td onclick="toggleHighlight(this)" contenteditable="true"></td>
+                <td onclick="toggleHighlight(this)" contenteditable="true"></td>
+                <td onclick="toggleHighlight(this)" contenteditable="true"></td>
+                <td onclick="toggleHighlight(this)" contenteditable="true"></td>
+                <td onclick="toggleHighlight(this)" contenteditable="true"></td>
+                <td onclick="toggleHighlight(this)" contenteditable="true"></td>
+                <td onclick="toggleHighlight(this)" contenteditable="true"></td>
+                <td onclick="toggleHighlight(this)" contenteditable="true"></td>
+                <td onclick="toggleHighlight(this)" contenteditable="true"></td>
+                <td onclick="toggleHighlight(this)" contenteditable="true"></td>
+                <td onclick="toggleHighlight(this)" contenteditable="true"></td>
+                <td onclick="toggleHighlight(this)" contenteditable="true"></td>
+                <td onclick="toggleHighlight(this)" contenteditable="true"></td>
+            </tr>
+            <tr>
+                <th>Friday</th>
+                <td onclick="toggleHighlight(this)" contenteditable="true"></td>
+                <td onclick="toggleHighlight(this)" contenteditable="true"></td>
+                <td onclick="toggleHighlight(this)" contenteditable="true"></td>
+                <td onclick="toggleHighlight(this)" contenteditable="true"></td>
+                <td onclick="toggleHighlight(this)" contenteditable="true"></td>
+                <td onclick="toggleHighlight(this)" contenteditable="true"></td>
+                <td onclick="toggleHighlight(this)" contenteditable="true"></td>
+                <td onclick="toggleHighlight(this)" contenteditable="true"></td>
+                <td onclick="toggleHighlight(this)" contenteditable="true"></td>
+                <td onclick="toggleHighlight(this)" contenteditable="true"></td>
+                <td onclick="toggleHighlight(this)" contenteditable="true"></td>
+                <td onclick="toggleHighlight(this)" contenteditable="true"></td>
+                <td onclick="toggleHighlight(this)" contenteditable="true"></td>
+            </tr>
+        </tbody>
+    </table>
+
+    <script>
+        function toggleHighlight(cell) {
+            cell.classList.toggle('highlight');
+        }
+    </script>
+</body>
